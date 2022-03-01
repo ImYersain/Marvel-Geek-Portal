@@ -11,8 +11,8 @@ class CharList extends Component {
         error: false
     }
     marvelService = new MarvelService();
-    onError = (charList) => {
-        this.setState({charList, error: true})
+    onError = () => {
+        this.setState({error: true, loading: false})
     }
     onCharListLoaded = (charList) => {
         this.setState({charList, loading: false, error: false})
@@ -28,10 +28,11 @@ class CharList extends Component {
         let item = arr.map(i => {
             let imgStyle = {'objectFit':  'cover'};
             if(i.thumbnail === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg'){
-            imgStyle = {'objectFit': 'contain'};
+            imgStyle = {'objectFit': 'unset'};
         }
             return (
-                <li className="char__item">
+                <li className="char__item" key={i.id}
+                onClick={() => this.props.onCharSelected(i.id)}>
                     <img src={i.thumbnail} alt={i.name} style={imgStyle}/>
                      <div className="char__name">{i.name}</div>
                 </li>
