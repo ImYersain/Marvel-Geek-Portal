@@ -35,6 +35,7 @@ class CharInfo extends Component {
             .getCharacter(charId)
             .then(this.onCharLoaded)
             .catch(this.onError);
+        this.foo.bar = 0;
     }
 
     onCharLoaded = (char) => {
