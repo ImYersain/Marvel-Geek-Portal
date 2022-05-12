@@ -8,18 +8,11 @@ import Skeleton from '../skeleton/Skeleton';
 
 
 import './charInfo.scss';
+import { Link } from 'react-router-dom';
 
 
 const CharInfo = (props) => {
-    // state = {
-    //     char: null,
-    //     loading: false,
-    //     error: false,
-    // }
-    
     const [char, setChar] = useState(null);
-
-
     const {loading, error, getCharacter, clearError} = useMarvelService();
 
     useEffect(() => {
@@ -91,11 +84,12 @@ const View = ({ char }) => {
             <ul className="char__comics-list">
                 {comics.length === 0?'There is no comics with this character':null}
                 {
-                    comics.map((item , i) => {       
+                    comics.map((item , i) => {
+                        console.log(item)
                         return (
-                            <li key={i} className="char__comics-item">
+                            <Link to={`/comics/${item.resourceURI.substring(43)}`} key={i} className="char__comics-item">
                                 {item.name}
-                            </li>
+                            </Link>
                         )}
                     )
                 }
